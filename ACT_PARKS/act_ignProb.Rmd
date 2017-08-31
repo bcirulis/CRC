@@ -15,7 +15,7 @@ library(raster)
 ```
 
 ```{r Data Setup, echo = FALSE,eval=T}
-allpoints <- shapefile("M:/CRC RISK/Data/ACT/StateWideIgnProb/ignFFDI_all.shp")
+allpoints <- shapefile("M:/CRC RISK/Data/ACT/StateWideIgnProb/ignFFDI_allv2.shp")
 
 ```
 
@@ -60,7 +60,7 @@ Column
 ### FFDI: 25
 ```{r, echo = FALSE}
 
-r <- raster("M:/CRC RISK/Data/ACT/StateWideIgnProb/rasters/ign25.tif")
+r <- raster("M:/CRC RISK/Data/ACT/StateWideIgnProb/rasters/ign25v2.tif")
 pal <- colorNumeric(c("#7bc3e0","#edd99a", "#ff9b44", "#ff0000","#ba0000"), domain = c(0,1),
                     na.color = "transparent")
 
@@ -76,7 +76,7 @@ leaflet() %>% addTiles() %>%
 ### FFDI: 75
 ```{r, echo = FALSE}
 
-r <- raster("M:/CRC RISK/Data/ACT/StateWideIgnProb/rasters/ign75.tif")
+r <- raster("M:/CRC RISK/Data/ACT/StateWideIgnProb/rasters/ign75v2.tif")
 pal <- colorNumeric(c("#7bc3e0","#edd99a", "#ff9b44", "#ff0000","#ba0000"), domain = c(0,1),
                     na.color = "transparent")
 
@@ -92,7 +92,7 @@ Column
 ### FFDI: 50
 ```{r, echo = FALSE}
 
-r <- raster("M:/CRC RISK/Data/ACT/StateWideIgnProb/rasters/ign50.tif")
+r <- raster("M:/CRC RISK/Data/ACT/StateWideIgnProb/rasters/ign50v2.tif")
 pal <- colorNumeric(c("#7bc3e0","#edd99a", "#ff9b44", "#ff0000","#ba0000"), domain = c(0,1),
                     na.color = "transparent")
 
@@ -105,7 +105,7 @@ leaflet() %>% addTiles() %>%
 
 ### FFDI: 130
 ```{r, echo = FALSE}
-r <- raster("M:/CRC RISK/Data/ACT/StateWideIgnProb/rasters/ign130.tif")
+r <- raster("M:/CRC RISK/Data/ACT/StateWideIgnProb/rasters/ign130v2.tif")
 pal <- colorNumeric(c("#7bc3e0","#edd99a", "#ff9b44", "#ff0000","#ba0000"), domain = c(0,1),
                     na.color = "transparent")
 

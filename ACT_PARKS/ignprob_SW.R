@@ -6,10 +6,10 @@ crs <- crs(shapefile("M:/CRC RISK/Data/ACT/StateWideIgnProb/ign500m.shp"))
 
 # read in the csv
 
-i25 <- read.csv("M:/CRC RISK/Data/ACT/StateWideIgnProb/500m_IGPROB25.csv")
-i50 <- read.csv("M:/CRC RISK/Data/ACT/StateWideIgnProb/500m_IGPROB50.csv")
-i75 <- read.csv("M:/CRC RISK/Data/ACT/StateWideIgnProb/500m_IGPROB75.csv")
-i130 <- read.csv("M:/CRC RISK/Data/ACT/StateWideIgnProb/500m_IGPROB130.csv")
+i25 <- read.csv("M:/CRC RISK/Data/ACT/StateWideIgnProb/ACTigndata_probv2_25.csv")
+i50 <- read.csv("M:/CRC RISK/Data/ACT/StateWideIgnProb/ACTigndata_probv2_50.csv")
+i75 <- read.csv("M:/CRC RISK/Data/ACT/StateWideIgnProb/ACTigndata_probv2_75.csv")
+i130 <- read.csv("M:/CRC RISK/Data/ACT/StateWideIgnProb/ACTigndata_probv2_100.csv")
 
 # merge all the data
 alldata <- data.frame(i25$xco,i25$yco,i25$prob,i50$prob,i75$prob,i130$prob)
@@ -17,8 +17,8 @@ colnames(alldata) <- c("x","y","prob25","prob50","prob75","prob130")
 
 allpoints <- SpatialPointsDataFrame(alldata[,c(1,2)],alldata,proj4string= crs)
 
-shapefile(allpoints,"M:/CRC RISK/Data/ACT/StateWideIgnProb/ignFFDI_all.shp")
-write.csv(alldata,"M:/CRC RISK/Data/ACT/StateWideIgnProb/IgnProb_ACT.csv")
+shapefile(allpoints,"M:/CRC RISK/Data/ACT/StateWideIgnProb/ignFFDI_allv2.shp")
+write.csv(alldata,"M:/CRC RISK/Data/ACT/StateWideIgnProb/IgnProb_ACTv2.csv")
 #leaflet
 
 
