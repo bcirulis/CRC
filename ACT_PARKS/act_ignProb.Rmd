@@ -1,0 +1,116 @@
+---
+title: "ACT Ignition Probability"
+output: 
+  flexdashboard::flex_dashboard:
+    theme: bootstrap
+    logo: Q:/CRC_PPP/ACT/Analysis/Melbourne-Uni-logo.jpg
+---
+
+
+```{r setup, include=FALSE,eval=T}
+knitr::opts_chunk$set(echo = TRUE,cache=F, eval=T)
+library(leaflet)
+library(raster)
+
+```
+
+```{r Data Setup, echo = FALSE,eval=T}
+allpoints <- shapefile("M:/CRC RISK/Data/ACT/StateWideIgnProb/ignFFDI_all.shp")
+
+```
+
+
+Ignition Probability
+=====================================================
+Column
+-------------------------------------
+\
+<center>**Ignition Probability**</center>
+\
+
+The purpose of this study is to create an ignition probability layer for the ACT.  To achieve this, a point grid was created across the ACT and surrounds.  The resolution of this grid is 500m, resulting in a total of 31,816 points.
+
+For each of these points, the ignition probability was calculated using a Bayesian network (below). The road proximity, house density and average rainfall nodes were conditionalised using the underlying data for each point.  The model was then run for each point under four FFDI's;  25,50,75 and 130.  
+
+The raw data is attached in a csv, which contains x/y (GDA 1994, NSW Lamberts) data as well as the probability of ignition under the four FFDI's. 
+
+Additionally, 4 rasters were generated from the points using the Kriging interpolation method within ArcGIS. (viewable in this HTML and attached in .tif format).
+
+![](bayesnet.JPG)
+
+Column
+-------------------------------------
+### Potential Ignition Grid
+```{r, echo = FALSE}
+
+
+ign <- spTransform(allpoints, CRS("+proj=longlat +datum=WGS84 +no_defs"))
+
+map <- leaflet(ign) %>% addTiles() %>% setView(149.1300,-35.2809, zoom = 11)
+
+map %>% 
+  addCircleMarkers(radius = .5, color = "Black",fill = T, weight = 2,opacity = 1)
+```
+
+Ignition Probability Rasters
+=====================================================
+
+Column
+-------------------------------------
+### FFDI: 25
+```{r, echo = FALSE}
+
+r <- raster("M:/CRC RISK/Data/ACT/StateWideIgnProb/rasters/ign25.tif")
+pal <- colorNumeric(c("#7bc3e0","#edd99a", "#ff9b44", "#ff0000","#ba0000"), domain = c(0,1),
+                    na.color = "transparent")
+
+leaflet() %>% addTiles() %>%
+  addRasterImage(r, colors = pal, opacity = 0.8) %>%
+  addLegend(pal = pal, values = c(0,1),
+            title = "Ignition Probability")
+
+
+```
+
+
+### FFDI: 75
+```{r, echo = FALSE}
+
+r <- raster("M:/CRC RISK/Data/ACT/StateWideIgnProb/rasters/ign75.tif")
+pal <- colorNumeric(c("#7bc3e0","#edd99a", "#ff9b44", "#ff0000","#ba0000"), domain = c(0,1),
+                    na.color = "transparent")
+
+leaflet() %>% addTiles() %>%
+  addRasterImage(r, colors = pal, opacity = 0.8) %>%
+  addLegend(pal = pal, values = c(0,1),
+            title = "Ignition Probability")
+
+```
+
+Column
+-------------------------------------
+### FFDI: 50
+```{r, echo = FALSE}
+
+r <- raster("M:/CRC RISK/Data/ACT/StateWideIgnProb/rasters/ign50.tif")
+pal <- colorNumeric(c("#7bc3e0","#edd99a", "#ff9b44", "#ff0000","#ba0000"), domain = c(0,1),
+                    na.color = "transparent")
+
+leaflet() %>% addTiles() %>%
+  addRasterImage(r, colors = pal, opacity = 0.8) %>%
+  addLegend(pal = pal, values = c(0,1),
+            title = "Ignition Probability")
+```
+
+
+### FFDI: 130
+```{r, echo = FALSE}
+r <- raster("M:/CRC RISK/Data/ACT/StateWideIgnProb/rasters/ign130.tif")
+pal <- colorNumeric(c("#7bc3e0","#edd99a", "#ff9b44", "#ff0000","#ba0000"), domain = c(0,1),
+                    na.color = "transparent")
+
+leaflet() %>% addTiles() %>%
+  addRasterImage(r, colors = pal, opacity = 0.8) %>%
+  addLegend(pal = pal, values = c(0,1),
+            title = "Ignition Probability")
+```
